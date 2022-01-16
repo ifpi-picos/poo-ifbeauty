@@ -6,6 +6,15 @@ public class Endereco {
     private int cep;
     private String uf;
 
+    public Endereco(int numero, String logradouro, String cidade, String bairro, int cep, String uf) {
+        this.numero = numero;
+        this.logradouro = logradouro;
+        this.cidade = cidade;
+        this.bairro = bairro;
+        this.cep = cep;
+        this.uf = uf;
+    }
+
     public int getNumero() {
         return numero;
     }

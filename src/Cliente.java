@@ -4,6 +4,13 @@ public class Cliente {
     private String sexoCliente;
     private Endereco enderecoCliente;
 
+    public Cliente(String nomeCliente, String emailCliente, String sexoCliente, Endereco enderecoCliente) {
+        this.nomeCliente = nomeCliente;
+        this.emailCliente = emailCliente;
+        this.sexoCliente = sexoCliente;
+        this.enderecoCliente = enderecoCliente;
+    }
+
     public String getNomeCliente() {
         return nomeCliente;
     }

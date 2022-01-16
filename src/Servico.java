@@ -3,6 +3,12 @@ public class Servico {
     private String DescricaoServico;
     private double ValorServico;
 
+    public Servico(String nomeServico, String descricaoServico, double valorServico) {
+        this.nomeServico = nomeServico;
+        this.DescricaoServico = descricaoServico;
+        this.ValorServico = valorServico;
+    }
+
     public String getNomeServico() {
         return nomeServico;
     }
