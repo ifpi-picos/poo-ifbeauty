@@ -6,6 +6,14 @@ public class RegistroDeServico {
     private Cliente clienteAtendido;
     private String nomeFuncionario;
 
+    public RegistroDeServico(LocalDate dataRealizacao, Servico servicoRealizado, Cliente clienteAtendido,
+            String nomeFuncionario) {
+        this.dataRealizacao = dataRealizacao;
+        this.servicoRealizado = servicoRealizado;
+        this.clienteAtendido = clienteAtendido;
+        this.nomeFuncionario = nomeFuncionario;
+    }
+
     public LocalDate getDataRealizacao() {
         return dataRealizacao;
     }
