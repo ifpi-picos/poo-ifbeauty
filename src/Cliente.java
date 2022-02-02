@@ -6,7 +6,7 @@ public class Cliente {
     private String emailCliente;
     private String sexoCliente;
     private Endereco enderecoCliente;
-    private List<Cliente> clientes = new ArrayList<>();
+    public static List<Cliente> clientes = new ArrayList<Cliente>(0);
 
     public Cliente(String nomeCliente, String emailCliente, String sexoCliente, Endereco enderecoCliente) {
         this.nomeCliente = nomeCliente;
@@ -15,19 +15,15 @@ public class Cliente {
         this.enderecoCliente = enderecoCliente;
     }
 
-    public void removerCliente(Cliente clienteASerRemovido) {
-        clienteASerRemovido = null;
-        clientes.remove(clienteASerRemovido);
+    public static Cliente getClienteByEmail(String email) {
+        email = email.replace(".", "").replace("-", "");
+        for (Cliente cliente : clientes) {
+            if (cliente.getEmailCliente().equals(email)) {
+                return cliente;
+            }
+        }
+        return null;
     }
-
-    public void adicionarCliente(Cliente clienteASerAdicionado) {
-        clientes.add(clienteASerAdicionado);
-    }
-
-    public void listarClientes() {
-        System.out.println(clientes);
-    }
-
     public String getNomeCliente() {
         return nomeCliente;
     }
@@ -55,4 +51,5 @@ public class Cliente {
     public void setEnderecoCliente(Endereco enderecoCliente) {
         this.enderecoCliente = enderecoCliente;
     }
+
 }
