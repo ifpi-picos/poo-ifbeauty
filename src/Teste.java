@@ -14,27 +14,41 @@ public class Teste {
                 String sexoCli = JOptionPane.showInputDialog(null, "Sexo do Cliente:(M ou F)");
                 String numeroEnd = JOptionPane.showInputDialog(null, "Número da casa:");
                 Integer numeroconv = Integer.valueOf(numeroEnd);
-                String logradoruroCli = JOptionPane.showInputDialog(null,"Logradouro: ");
-                String cidadeCli = JOptionPane.showInputDialog(null,"Cidade:");
-                String bairroCli = JOptionPane.showInputDialog(null,"Bairro:");
-                String cepCli = JOptionPane.showInputDialog(null,"CEP:");
+                String logradoruroCli = JOptionPane.showInputDialog(null, "Logradouro: ");
+                String cidadeCli = JOptionPane.showInputDialog(null, "Cidade:");
+                String bairroCli = JOptionPane.showInputDialog(null, "Bairro:");
+                String cepCli = JOptionPane.showInputDialog(null, "CEP:");
                 Integer cepConv = Integer.valueOf(cepCli);
-                String ufCli = JOptionPane.showInputDialog(null,"UF:");
-                Cliente cliente = new Cliente(nomeCli, emailCli, sexoCli, new Endereco(numeroconv,logradoruroCli, cidadeCli,bairroCli, cepConv, ufCli));
-                System.out.println(cliente.getNomeCliente());
+                String ufCli = JOptionPane.showInputDialog(null, "UF:");
+                Cliente cliente = new Cliente(nomeCli, emailCli, sexoCli,
+                        new Endereco(numeroconv, logradoruroCli, cidadeCli, bairroCli, cepConv, ufCli));
+                Cliente.clientes.add(cliente);
             }
             if (opcao.equals("2")) {
-                JOptionPane.showMessageDialog(null, "Cliente apagado!");
+                String emailapagar = JOptionPane.showInputDialog(null,
+                        "Informe o email do cliente que vai ser apagado:");
+                Cliente cliente = Cliente.getClienteByEmail(emailapagar);
+                if (cliente != null) {
+                    Cliente.clientes.remove(cliente);
+                    JOptionPane.showMessageDialog(null, "Cliente apagado!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ops, parece que esse cliente não existe");
+                }
             }
             if (opcao.equals("3")) {
-                JOptionPane.showMessageDialog(null, "Clientes listados!");
+                String listaClientes = "";
+                for (Cliente clientelistar : Cliente.clientes) {
+                    listaClientes += clientelistar.getNomeCliente() + "\n";
+
+                }
+                JOptionPane.showMessageDialog(null, listaClientes);
             }
             if (opcao.equals("4")) {
                 String nomeServ = JOptionPane.showInputDialog(null, "Nome do serviço:");
                 String descServ = JOptionPane.showInputDialog(null, "Descrição do serviço:");
                 String valorServ = JOptionPane.showInputDialog(null, "Valor do serviço:");
                 Integer servConv = Integer.valueOf(valorServ);
-                Servico servico = new Servico(nomeServ,descServ,servConv);
+                Servico servico = new Servico(nomeServ, descServ, servConv);
                 System.out.println(servico.getNomeServico());
             }
             if (opcao.equals("5")) {
