@@ -11,6 +11,10 @@ public class Teste {
             if (opcao.equals("1")) {
                 String nomeCli = JOptionPane.showInputDialog(null, "Nome do cliente:");
                 String emailCli = JOptionPane.showInputDialog(null, "Email do Cliente:");
+                Cliente clienteRepeat = Cliente.getClienteByEmail(emailCli);
+                if (clienteRepeat != null) {
+                    JOptionPane.showMessageDialog(null, "Esse e-mail já está em uso por outro Cliente");
+                }
                 String sexoCli = JOptionPane.showInputDialog(null, "Sexo do Cliente:(M ou F)");
                 String numeroEnd = JOptionPane.showInputDialog(null, "Número da casa:");
                 Integer numeroconv = Integer.valueOf(numeroEnd);
@@ -58,6 +62,7 @@ public class Teste {
                 JOptionPane.showMessageDialog(null, "Serviços listados!");
             }
             if (opcao.equals("7")) {
+                
                 JOptionPane.showMessageDialog(null, "Serviço realizado!");
             }
         }

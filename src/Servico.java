@@ -12,6 +12,9 @@ public class Servico {
         this.DescricaoServico = descricaoServico;
         this.ValorServico = valorServico;
     }
+
+
+    
     public String getNomeServico() {
         return nomeServico;
     }

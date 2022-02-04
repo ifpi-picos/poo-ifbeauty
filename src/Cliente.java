@@ -15,10 +15,10 @@ public class Cliente {
         this.enderecoCliente = enderecoCliente;
     }
 
-    public static Cliente getClienteByEmail(String email) {
-        email = email.replace(".", "").replace("-", "");
+    public static Cliente getClienteByEmail(String emailPesquisar) {
+        emailPesquisar= emailPesquisar.replace(".", "").replace("-", "");
         for (Cliente cliente : clientes) {
-            if (cliente.getEmailCliente().equals(email)) {
+            if (cliente.getEmailCliente().equals(emailPesquisar)) {
                 return cliente;
             }
         }
