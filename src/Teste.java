@@ -79,15 +79,22 @@ public class Teste {
                 String servicoRealizado = JOptionPane.showInputDialog(null, "Servico realizado:");
                 String clienteAtendido = JOptionPane.showInputDialog(null, "Cliente que recebeu o serviço:");
                 String nomeFuncionario = JOptionPane.showInputDialog(null, "Profissional que realizou o serviço:");
-                RegistroDeServico registro = new RegistroDeServico(dataFinal,
-                        Servico.getServicoByNome(servicoRealizado), Cliente.getClienteByNome(clienteAtendido),
-                        nomeFuncionario);
-                RegistroDeServico.registros.add(registro);
-                JOptionPane.showMessageDialog(null, "Serviço realizado e registrado!");
+                Servico servicoPorNome = Servico.getServicoByNome(servicoRealizado);
+                Cliente clientePorNome = Cliente.getClienteByNome(clienteAtendido);
+                if (servicoPorNome != null && clientePorNome != null) {
+                    RegistroDeServico registro = new RegistroDeServico(dataFinal, servicoPorNome, clientePorNome,
+                            nomeFuncionario);
+                    RegistroDeServico.registros.add(registro);
+                    JOptionPane.showMessageDialog(null, "Serviço realizado e registrado!");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Seu cliente ou seu serviço não foi encontrado");
+                }
             } else if (opcao.equals("8")) {
                 String listaRegistros = "";
                 for (RegistroDeServico registroListar : RegistroDeServico.registros) {
-                    listaRegistros += String.format("%s - %s - %s - %s", registroListar.getDataRealizacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                    listaRegistros += String.format("%s - %s - %s - %s",
+                            registroListar.getDataRealizacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
                             registroListar.getServicoRealizado().getNomeServico(),
                             registroListar.getClienteAtendido().getNomeCliente(), registroListar.getNomeFuncionario())
                             + "\n";
