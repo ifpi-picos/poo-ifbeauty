@@ -1,14 +1,19 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 
 public class Teste {
     public static void main(String[] args) throws Exception {
+        Cliente teste = new Cliente("eu", "eu.com", "M", new Endereco(1, "io", "oi", "ds", 21, "po"));
+        Servico teste2 = new Servico("oi", "lol", 21);
+        Cliente.clientes.add(teste);
+        Servico.servicos.add(teste2);
         while (true) {
             String opcao = JOptionPane.showInputDialog(
-                    "O que você deseja?: \n1- Novo cliente \n2- Apagar cliente  \n3- Listar clientes \n4- Novo serviço \n5- Apagar serviço  \n6- Listar serviços \n7- Realizar serviço \n0- Encerrar");
+                    "O que você deseja?: \n1- Novo cliente \n2- Apagar cliente  \n3- Listar clientes \n4- Novo serviço \n5- Apagar serviço  \n6- Listar serviços \n7- Realizar serviço \n8-Exibir registros  \n0-Encerrar");
             if (opcao.equals("0")) {
                 break;
-            }
-            if (opcao.equals("1")) {
+            } else if (opcao.equals("1")) {
                 String nomeCli = JOptionPane.showInputDialog(null, "Nome do cliente:");
                 String emailCli = JOptionPane.showInputDialog(null, "Email do Cliente:");
                 Cliente clienteRepeat = Cliente.getClienteByEmail(emailCli);
@@ -27,8 +32,7 @@ public class Teste {
                 Cliente cliente = new Cliente(nomeCli, emailCli, sexoCli,
                         new Endereco(numeroconv, logradoruroCli, cidadeCli, bairroCli, cepConv, ufCli));
                 Cliente.clientes.add(cliente);
-            }
-            if (opcao.equals("2")) {
+            } else if (opcao.equals("2")) {
                 String emailapagar = JOptionPane.showInputDialog(null,
                         "Informe o email do cliente que vai ser apagado:");
                 Cliente cliente = Cliente.getClienteByEmail(emailapagar);
@@ -38,32 +42,57 @@ public class Teste {
                 } else {
                     JOptionPane.showMessageDialog(null, "Ops, parece que esse cliente não existe");
                 }
-            }
-            if (opcao.equals("3")) {
+            } else if (opcao.equals("3")) {
                 String listaClientes = "";
                 for (Cliente clientelistar : Cliente.clientes) {
                     listaClientes += clientelistar.getNomeCliente() + "\n";
 
                 }
                 JOptionPane.showMessageDialog(null, listaClientes);
-            }
-            if (opcao.equals("4")) {
+            } else if (opcao.equals("4")) {
                 String nomeServ = JOptionPane.showInputDialog(null, "Nome do serviço:");
                 String descServ = JOptionPane.showInputDialog(null, "Descrição do serviço:");
                 String valorServ = JOptionPane.showInputDialog(null, "Valor do serviço:");
                 Integer servConv = Integer.valueOf(valorServ);
                 Servico servico = new Servico(nomeServ, descServ, servConv);
-                System.out.println(servico.getNomeServico());
-            }
-            if (opcao.equals("5")) {
-                JOptionPane.showMessageDialog(null, "Serviço apagado!");
-            }
-            if (opcao.equals("6")) {
-                JOptionPane.showMessageDialog(null, "Serviços listados!");
-            }
-            if (opcao.equals("7")) {
-                
-                JOptionPane.showMessageDialog(null, "Serviço realizado!");
+                Servico.servicos.add(servico);
+            } else if (opcao.equals("5")) {
+                String nomeApagar = JOptionPane.showInputDialog(null, "Digite o serviço que vai ser apagado");
+                Servico servico = Servico.getServicoByNome(nomeApagar);
+                if (servico != null) {
+                    Servico.servicos.remove(servico);
+                    JOptionPane.showMessageDialog(null, "Serviço apagado!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Serviço não registrado");
+                }
+            } else if (opcao.equals("6")) {
+                String listaServicos = "";
+                for (Servico servicoListar : Servico.servicos) {
+                    listaServicos += servicoListar.getNomeServico() + "\n";
+
+                }
+                JOptionPane.showMessageDialog(null, listaServicos);
+            } else if (opcao.equals("7")) {
+                String dataRealizacao = JOptionPane.showInputDialog(null,
+                        "Quando o serviço foi realizado(dia/mês/ano)?");
+                LocalDate dataFinal = LocalDate.parse(dataRealizacao, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                String servicoRealizado = JOptionPane.showInputDialog(null, "Servico realizado:");
+                String clienteAtendido = JOptionPane.showInputDialog(null, "Cliente que recebeu o serviço:");
+                String nomeFuncionario = JOptionPane.showInputDialog(null, "Profissional que realizou o serviço:");
+                RegistroDeServico registro = new RegistroDeServico(dataFinal,
+                        Servico.getServicoByNome(servicoRealizado), Cliente.getClienteByNome(clienteAtendido),
+                        nomeFuncionario);
+                RegistroDeServico.registros.add(registro);
+                JOptionPane.showMessageDialog(null, "Serviço realizado e registrado!");
+            } else if (opcao.equals("8")) {
+                String listaRegistros = "";
+                for (RegistroDeServico registroListar : RegistroDeServico.registros) {
+                    listaRegistros += String.format("%s - %s - %s - %s", registroListar.getDataRealizacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                            registroListar.getServicoRealizado().getNomeServico(),
+                            registroListar.getClienteAtendido().getNomeCliente(), registroListar.getNomeFuncionario())
+                            + "\n";
+                }
+                JOptionPane.showMessageDialog(null, listaRegistros);
             }
         }
     }

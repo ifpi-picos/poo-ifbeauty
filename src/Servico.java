@@ -5,16 +5,24 @@ public class Servico {
     private String nomeServico;
     private String DescricaoServico;
     private double ValorServico;
-    public static List<Cliente> servicos = new ArrayList<Cliente>(0);
+    public static List<Servico> servicos = new ArrayList<Servico>(0);
 
     public Servico(String nomeServico, String descricaoServico, double valorServico) {
         this.nomeServico = nomeServico;
         this.DescricaoServico = descricaoServico;
         this.ValorServico = valorServico;
     }
-
-
     
+    public static Servico getServicoByNome(String nomePesquisar) {
+        for (Servico servico : servicos) {
+            if (servico.getNomeServico().equals(nomePesquisar)) {
+                return servico;
+            }
+        }
+        return null;
+    }
+
+
     public String getNomeServico() {
         return nomeServico;
     }

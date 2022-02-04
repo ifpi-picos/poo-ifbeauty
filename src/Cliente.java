@@ -16,7 +16,6 @@ public class Cliente {
     }
 
     public static Cliente getClienteByEmail(String emailPesquisar) {
-        emailPesquisar= emailPesquisar.replace(".", "").replace("-", "");
         for (Cliente cliente : clientes) {
             if (cliente.getEmailCliente().equals(emailPesquisar)) {
                 return cliente;
@@ -24,6 +23,16 @@ public class Cliente {
         }
         return null;
     }
+
+    public static Cliente getClienteByNome(String nomePesquisar) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getNomeCliente().equals(nomePesquisar)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+
     public String getNomeCliente() {
         return nomeCliente;
     }

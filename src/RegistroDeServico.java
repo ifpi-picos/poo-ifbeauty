@@ -1,10 +1,13 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegistroDeServico {
     private LocalDate dataRealizacao;
     private Servico servicoRealizado;
     private Cliente clienteAtendido;
     private String nomeFuncionario;
+    public static List<RegistroDeServico> registros = new ArrayList<RegistroDeServico>(0);
 
     public RegistroDeServico(LocalDate dataRealizacao, Servico servicoRealizado, Cliente clienteAtendido,
             String nomeFuncionario) {
