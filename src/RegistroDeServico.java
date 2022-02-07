@@ -1,6 +1,8 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class RegistroDeServico {
     private LocalDate dataRealizacao;
@@ -15,6 +17,19 @@ public class RegistroDeServico {
         this.servicoRealizado = servicoRealizado;
         this.clienteAtendido = clienteAtendido;
         this.nomeFuncionario = nomeFuncionario;
+    }
+    
+    public class DateValidator {
+
+        public boolean isValid(String date) {
+           try {
+              DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+              LocalDate d = LocalDate.parse(date, formatter);    
+              return true;
+           } catch (DateTimeParseException e) {
+             return false;
+           }   
+        }
     }
 
     public LocalDate getDataRealizacao() {
