@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 public class Teste {
     public static void main(String[] args) throws Exception {
+        // Criando objetos de teste
         Cliente teste = new Cliente("eu", "eu.com", "M", new Endereco(1, "io", "oi", "ds", 21, "po"));
         Servico teste2 = new Servico("oi", "lol", 21);
         Cliente.clientes.add(teste);
@@ -86,8 +87,7 @@ public class Teste {
                             nomeFuncionario);
                     RegistroDeServico.registros.add(registro);
                     JOptionPane.showMessageDialog(null, "Serviço realizado e registrado!");
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Seu cliente ou seu serviço não foi encontrado");
                 }
             } else if (opcao.equals("8")) {
