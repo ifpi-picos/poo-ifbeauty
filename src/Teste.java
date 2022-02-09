@@ -1,6 +1,8 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+import java.time.format.DateTimeParseException;
+
 
 public class Teste {
     public static void main(String[] args) throws Exception {
@@ -77,11 +79,19 @@ public class Teste {
                 String dataRealizacao = JOptionPane.showInputDialog(null,
                         "Quando o serviço foi realizado(dia/mês/ano)?");
                 LocalDate dataFinal = LocalDate.parse(dataRealizacao, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                try {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate date = LocalDate.parse(dataRealizacao, formatter);
+                    String dataValida = JOptionPane.showInputDialog(null, "Serviço adicionado na lista");
+                } catch (DateTimeParseException e) {
+                    String dataInvalida = JOptionPane.showInputDialog(null,"Data inválida");
+                }
                 String servicoRealizado = JOptionPane.showInputDialog(null, "Servico realizado:");
                 String clienteAtendido = JOptionPane.showInputDialog(null, "Cliente que recebeu o serviço:");
                 String nomeFuncionario = JOptionPane.showInputDialog(null, "Profissional que realizou o serviço:");
                 Servico servicoPorNome = Servico.getServicoByNome(servicoRealizado);
                 Cliente clientePorNome = Cliente.getClienteByNome(clienteAtendido);
+                
                 if (servicoPorNome != null && clientePorNome != null) {
                     RegistroDeServico registro = new RegistroDeServico(dataFinal, servicoPorNome, clientePorNome,
                             nomeFuncionario);

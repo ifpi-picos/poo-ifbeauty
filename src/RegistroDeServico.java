@@ -18,7 +18,7 @@ public class RegistroDeServico {
         this.clienteAtendido = clienteAtendido;
         this.nomeFuncionario = nomeFuncionario;
     }
-    
+
     public class DateValidator {
 
         public boolean isValid(String date) {
@@ -31,7 +31,7 @@ public class RegistroDeServico {
            }   
         }
     }
-
+    
     public LocalDate getDataRealizacao() {
         return dataRealizacao;
     }
